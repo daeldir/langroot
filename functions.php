@@ -6,6 +6,7 @@ function standardize($word) {
 }
 
 function listWords() {
+    if (!file_exists("./words")) mkdir("./words");
     $dir = opendir("./words");
     $files = [];
     while($filename = readdir($dir)) {
