@@ -1,12 +1,4 @@
-<?php include_once "functions.php"; 
-include_once "set_variables.php";
-function isActive($page) {
-    global $currentPage;
-    if ($page == $currentPage) return " class=\"active\"";
-    return "";
-}
-
-?><!doctype html>
+<!doctype html>
 <html>
 <head>
 
@@ -14,7 +6,7 @@ function isActive($page) {
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>LangRoot<?=$title?></title>
+<title>LangRoot<?=data("title")?></title>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -53,18 +45,18 @@ function isActive($page) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php?word=<?=$word?>">LangRoot</a>
+            <a class="navbar-brand" href="index.php?word=<?=data("word")?>">LangRoot</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li<?=isActive("index")?>><a href="index.php?word=<?=$word?>">Accueil</a></li>
-                <li<?=isActive("view")?>><a href="view.php?word=<?=$word?>">Voir</a></li>
-                <li<?=isActive("edit")?>><a href="edit.php?word=<?=$word?>">Éditer</a></li>
-                <li<?=isActive("all")?>><a href="all.php?word=<?=$word?>">Tout</a></li>
+                <li<?=isActive("index")?>><a href="index.php?word=<?=data("word")?>">Accueil</a></li>
+                <li<?=isActive("view")?>><a href="view.php?word=<?=data("word")?>">Voir</a></li>
+                <li<?=isActive("edit")?>><a href="edit.php?word=<?=data("word")?>">Éditer</a></li>
+                <li<?=isActive("all")?>><a href="all.php?word=<?=data("word")?>">Tout</a></li>
             </ul>
-            <form class="navbar-form navbar-right" role="search" action="<?=$search?>" method="get">
+            <form class="navbar-form navbar-right" role="search" action="<?=data("search")?>" method="get">
                 <div class="form-group ui-widget">
                     <input type="text" class="form-control" placeholder="Trouver un mot" name="word" id="search">
                 </div>
@@ -74,3 +66,14 @@ function isActive($page) {
     </div><!-- /.container-fluid -->
 </nav>
 
+<?=$body?>
+
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="scripts.js"></script>
+
+</body>
+</html>

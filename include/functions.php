@@ -1,13 +1,16 @@
 <?php
 
+$words_dir = "./words";
+
 function standardize($word) {
     // TODO: replace characters so that only [a-zA-Z0-9_\-] are accepted.
     return trim(preg_replace("/[^a-zA-Z0-9_\-]/", "", $word));
 }
 
 function listWords() {
-    if (!file_exists("./words")) mkdir("./words");
-    $dir = opendir("./words");
+    global $words_dir;
+    if (!file_exists($words_dir)) mkdir($words_dir);
+    $dir = opendir($words_dir);
     $files = [];
     while($filename = readdir($dir)) {
         if ($filename == "." or $filename == "..") continue;
@@ -41,21 +44,24 @@ function rootsTextToArray($text) {
 }
 
 function saveWord($word, $roots) {
+    global $words_dir;
     $word = standardize($word);
-    file_put_contents("./words/$word", rootsAsText($roots));
+    file_put_contents("$words_dir/$word", rootsAsText($roots));
     generateWords();
 }
 
 function removeWord($word) {
+    global $words_dir;
     $word = standardize($word);
-    unlink("./words/$word");
+    unlink("$words_dir/$word");
     generateWords();
 }
 
 function listRoots($word) {
+    global $words_dir;
     $word = standardize($word);
-    if (file_exists("./words/$word")) {
-        $file = file_get_contents("./words/$word");
+    if (file_exists("$words_dir/$word")) {
+        $file = file_get_contents("$words_dir/$word");
         return rootsTextToArray($file);
     } else {
         return [];
@@ -63,12 +69,13 @@ function listRoots($word) {
 }
 
 function generateWords() {
+    global $words_dir;
     foreach(listWords() as $word) {
         $word = standardize($word);
         foreach(listRoots($word) as $root) {
             $root = standardize($root);
-            if (!file_exists("./words/$root")) {
-                touch("./words/$root");
+            if (!file_exists("$words_dir/$root")) {
+                touch("$words_dir/$root");
             }
         }
     }

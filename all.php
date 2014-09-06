@@ -1,4 +1,6 @@
-<?php include_once "header.php"; 
+<?php
+include_once "include/app.php"; 
+
 function isCurrentWord($w) {
     global $word;
     if ($w == $word) return " class=\"info\"";
@@ -40,56 +42,14 @@ function disableLast() {
     if ($page == $maxpages) return " class=\"disabled\"";
     return "";
 }
-?>
 
-<div class="text-center">
-    <ul class="pagination">
-    <li<?=disableFirst()?>><a href="all.php?word=<?=$word?>&page=<?=$page-1?>">&laquo;</a></li>
-        <?php for ($i = 1; $i <= $maxpages; $i++):?>
-        <li<?=pageActive($i)?>><a href="all.php?word=<?=$word?>&page=<?=$i?>"><?=$i?><?=pageActiveSpan($i)?></a></li>
-        <?php endfor ?>
-        <li<?=disableLast()?>><a href="all.php?word=<?=$word?>&page=<?=$page+1?>">&raquo;</a></li>
-    </ul>
-</div>
+add_data([
+    "current page" => "all",
+    "title" => " - Tout les mots",
+    "page" => $page,
+    "maxpages" => $maxpages,
+    "limit" => $limit
+]);
 
-<div class="table-responsive"><table class="table table-hover">
-    <tr>
-        <th></th>
-        <th>Mots</th>
-        <th>Racines</th>
-        <th>Concepts</th>
-   </tr>
-    <?php foreach (limitedListWords($limit, $page) as $thisword):?>
-        <tr<?=isCurrentWord($thisword)?>>
-            <td style="text-align: center">
-                <a href="remove.php?word=<?=$thisword?>" title="Supprimer">
-                    <span class="glyphicon glyphicon-remove"></span>
-                </a>
-            </td>
-            <td>
-                <a href="view.php?word=<?=$thisword?>"><?=$thisword?></a></td>
-            <td>
-                <?php foreach (listRoots($thisword) as $root):?>
-                    <a href="view.php?word=<?=$root?>"><?=$root?></a>
-                <?php endforeach;?>
-            </td>
-            <td>
-                <?php foreach (explodeWord($thisword) as $root):?>
-                    <a href="view.php?word=<?=$root?>"><?=$root?></a>
-                <?php endforeach;?>
-            </td>
-        </tr>
-    <?php endforeach;?>
-</table></div>
+render("templates/all.php");
 
-<div class="text-center">
-    <ul class="pagination">
-    <li<?=disableFirst()?>><a href="all.php?word=<?=$word?>&page=<?=$page-1?>">&laquo;</a></li>
-        <?php for ($i = 1; $i <= $maxpages; $i++):?>
-        <li<?=pageActive($i)?>><a href="all.php?word=<?=$word?>&page=<?=$i?>"><?=$i?><?=pageActiveSpan($i)?></a></li>
-        <?php endfor ?>
-        <li<?=disableLast()?>><a href="all.php?word=<?=$word?>&page=<?=$page+1?>">&raquo;</a></li>
-    </ul>
-</div>
-
-<?php include_once "footer.php"; ?>
