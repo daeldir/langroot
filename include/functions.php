@@ -3,7 +3,6 @@
 $words_dir = "./words";
 
 function standardize($word) {
-    // TODO: replace characters so that only [a-zA-Z0-9_\-] are accepted.
     return trim(preg_replace("/[^a-zA-Z0-9_\-]/", "", $word));
 }
 
