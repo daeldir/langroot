@@ -17,9 +17,24 @@ français, mais si je devais inventer le mot « voiture » dans une langue qui
 déjà le mot « machine », je pourrais l'utiliser comme racine.
 
 La base de donnée française est dans un autre dépôt, ce dépôt-ci ne devrait
-contenir que du code.
+contenir que du code. Vous pouvez trouver un dépôt d'exemple ici:
+
+https://github.com/daeldir/langroot-words-fr
 
 L'interface est en français, mais le code en anglais, peu commenté. Tout le
 code PHP est « artisanal ». Bootstrap est utilisé pour le style, parce que la
 flemme, c'est un brouillon :-°
+
+## Installation
+
+Dans un dossier accessible par votre serveur web, avec PHP de fonctionnel.
+S'assurer que le dossier « words » est accessible en écriture (soit vous le
+créez, soit le logiciel essaye de le créer, auquel cas le dossier contenant le
+site doit être accessible en écriture… Créez un fichier « words » :-))
+
+Vous pouvez aussi cloner le dictionnaire français pour partir sur avec une base.
+
+Positionnez vous dans le dossier contenant ce readme, puis :
+
+    git clone https://github.com/daeldir/langroot-words-fr.git
 
