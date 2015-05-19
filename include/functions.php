@@ -12,7 +12,9 @@ function listWords() {
     $dir = opendir($words_dir);
     $files = [];
     while($filename = readdir($dir)) {
-        if ($filename == "." or $filename == "..") continue;
+        if ($filename == "." or $filename == ".." or $filename == ".git") {
+            continue;
+        }
         array_push($files, standardize($filename));
     }
     closedir($dir);
